@@ -5,6 +5,8 @@
 #include <functional>
 #include "folder_monitor.h"
 #include "system_observable.h"
+#include <iostream>
+
 
 static constexpr int SYSTEM_OBSERVER_EPOOL_EVENTS = 4;
 static constexpr int SYSTEM_OBSERVER_EPOOL_WAIT = 1 * 1000;
@@ -40,7 +42,7 @@ class SystemObserver : public ml::EPollWorker<SYSTEM_OBSERVER_EPOOL_EVENTS,
           },
 
           [](const int errorCode) {
-            //LOGE << "Error on epoll, error code:" << errorCode;
+            std::cout << "Error on epoll, error code:" << errorCode << std::endl;
           });
       for (SystemObservable& obs : observers) {
         obs.process();

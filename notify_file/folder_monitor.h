@@ -9,6 +9,8 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <iostream>
+
 
 class FolderMonitor {
  public:
@@ -25,14 +27,14 @@ class FolderMonitor {
       close(descriptor);
       throw std::ios_base::failure("inotify_add_watch() failed");
     }
-    //LOGD << "Started observation of folder: " << path
-    //     << ", handle:" << descriptor;
+    std::cout << "Started observation of folder: " << path
+              << ", handle:" << descriptor << std::endl;
   }
 
   ~FolderMonitor() {
     if (descriptor >= 0) {
       close(descriptor);
-      //LOGD << "Finished observation of folder with handle: " << descriptor;
+      std::cout << "Finished observation of folder with handle: " << descriptor << std::endl;
     }
   }
 
@@ -141,21 +143,21 @@ class FolderMonitor {
 
       std::string path{event->name, event->len};
       if (event->mask & IN_CREATE) {
-        //LOGI << "New file to observe at:" << path;
+        std::cout << "New file to observe at:" << path << std::endl;
         watchedFiles.emplace_back(path);
 
       } else if (event->mask & IN_DELETE) {
         auto it = getWatchedFileIterator(path);
         if (it != watchedFiles.end()) {
           watchedFiles.erase(it);
-          //LOGI << "Finished observation of file:" << path;
+          std::cout << "Finished observation of file:" << std::endl;
         }
 
       } else {
         auto it = getWatchedFileIterator(path);
         if (it != watchedFiles.end()) {
           (*it).handleStateChange(event->mask);
-          //LOGI << "Change to observated file:" << path;
+          std::cout << "Change to observated file:" << path << std::endl;
         }
       }
     }
