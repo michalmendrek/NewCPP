@@ -1,0 +1,6 @@
+Compilation time dependencies:
+  * libudev-dev
+
+RUntime dependencies:
+  * shell comand unzip
+  * shell command tar

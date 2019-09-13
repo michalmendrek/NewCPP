@@ -1,0 +1,8 @@
+{
+  "usbTempPath" : "/tmp",
+  "policyPath" : "/some_folder/Policy.json",
+  "modulesDeployPath" : "/some_folder/modules",
+  "startMLAppCmd" : "supervisorctl start MLPlatform",
+  "stopMLAppCmd" : "supervisorctl stop MLPlatform",
+  "configureMLAppCmd" : "./prepare_env.sh"
+}
