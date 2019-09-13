@@ -13,11 +13,13 @@ int main()
 {
 
 crawler instancja("modol2", "/home/michalmendrek/log/dir_crawl/*");
-vector<string> linki;
 
-linki=instancja.GetLinks();
 
-for(auto it:linki)
+//vector<string> linki;
+
+//linki=instancja.GetLinks();
+
+for(auto it:instancja.GetLinks())
 {
 cout << it << endl;
 }
